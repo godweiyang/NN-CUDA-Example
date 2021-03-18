@@ -9,7 +9,6 @@ void torch_launch_add2(torch::Tensor &c,
                 (const float *)a.data_ptr(),
                 (const float *)b.data_ptr(),
                 n);
-    
 }
 
 PYBIND11_MODULE(TORCH_EXTENSION_NAME, m) {
