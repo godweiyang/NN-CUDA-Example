@@ -4,8 +4,10 @@ import torch
 from torch.utils.cpp_extension import load
 
 cuda_module = load(name="add2",
-                   sources=["add2.cpp", "add2.cu"],
+                   extra_include_paths=["./include"],
+                   sources=["./kernel/add2.cpp", "./kernel/add2.cu"],
                    verbose=True)
+# torch.ops.load_library("build/libadd2.so")
 
 # c = a + b (shape: [n])
 n = 1024 * 1024
@@ -35,6 +37,7 @@ def show_time(func):
 
 def run_cuda():
     cuda_module.torch_launch_add2(cuda_c, a, b, n)
+    # torch.ops.add2.torch_launch_add2(c, a, b, n)
     return cuda_c
 
 def run_torch():
