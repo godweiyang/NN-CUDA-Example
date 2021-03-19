@@ -3,8 +3,6 @@ A simple example for PyTorch calling custom CUDA operators.
 
 ## Code structure
 ```shell
-├── CMakeLists.txt
-├── CONTRIBUTING.md 
 ├── include
 │   └── add2.h # header file of add2 cuda kernel
 ├── kernel
