@@ -20,10 +20,10 @@ A simple example for PyTorch calling custom CUDA operators.
 
 ## Usage
 ### Compile cpp and cuda
-**JIT**
+**JIT**  
 Directly run python code.
 
-**CMake (To do)**
+**CMake (To do)**  
 ```shell
 mkdir build
 cd build
@@ -31,18 +31,18 @@ cmake -DCMAKE_PREFIX_PATH="$(python3 -c 'import torch.utils; print(torch.utils.c
 make -j
 ```
 
-**Setuptools (To do)**
+**Setuptools (To do)**  
 ```shell
 python3 setup.py build develop
 ```
 
 ### Run python
-**Compare kernel time**
+**Compare kernel time**  
 ```shell
 python3 show_time.py
 ```
 
-**Train**
+**Train**  
 ```shell
 python3 train.py
 ```
