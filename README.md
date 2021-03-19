@@ -1,7 +1,7 @@
-# torch-cuda-example
+# Torch-cuda-example
 A simple example for PyTorch calling custom CUDA operators.
 
-## Code Structure
+## Code structure
 ```shell
 ├── CMakeLists.txt
 ├── CONTRIBUTING.md 
