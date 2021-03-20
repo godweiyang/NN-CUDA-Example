@@ -35,11 +35,10 @@ def run_cuda():
     elif args.compiler == 'setup':
         add2.torch_launch_add2(cuda_c, a, b, n)
     elif args.compiler == 'cmake':
-        raise NotImplementedError("Not implement now.")
-        # torch.ops.add2.torch_launch_add2(c, a, b, n)
+        torch.ops.add2.torch_launch_add2(cuda_c, a, b, n)
     else:
         raise Exception("Type of cuda compiler must be one of jit/setup/cmake.")
-    
+
     return cuda_c
 
 def run_torch():
@@ -62,8 +61,7 @@ if __name__ == "__main__":
     elif args.compiler == 'setup':
         import add2
     elif args.compiler == 'cmake':
-        raise NotImplementedError("Not implement now.")
-        # torch.ops.load_library("build/libadd2.so")
+        torch.ops.load_library("build/libadd2.so")
     else:
         raise Exception("Type of cuda compiler must be one of jit/setup/cmake.")
 

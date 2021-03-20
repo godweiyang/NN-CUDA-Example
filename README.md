@@ -19,7 +19,6 @@ We provide three ways to compile the CUDA kernel and its cpp warpper, including 
 ├── include
 │   └── add2.h # header file of add2 cuda kernel
 ├── kernel
-│   ├── CMakeLists.txt
 │   ├── add2_kernel.cu # add2 cuda kernel
 │   └── add2.cpp # torch warpper of add2 cuda kernel
 ├── CMakeLists.txt
@@ -40,12 +39,12 @@ Directly run python code as in next section.
 python3 setup.py install
 ```
 
-**CMake (not implemented)**  
+**CMake**  
 ```shell
 mkdir build
 cd build
 cmake -DCMAKE_PREFIX_PATH="$(python3 -c 'import torch.utils; print(torch.utils.cmake_prefix_path)')" ../
-make -j
+make
 ```
 
 ### Run python
