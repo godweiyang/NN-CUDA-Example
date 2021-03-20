@@ -20,6 +20,7 @@ A simple example for PyTorch calling custom CUDA operators.
 │   ├── CMakeLists.txt
 │   ├── add2_kernel.cu # add2 cuda kernel
 │   └── add2.cpp # torch warpper of add2 cuda kernel
+├── CMakeLists.txt
 ├── LICENSE
 ├── README.md
 ├── setup.py
