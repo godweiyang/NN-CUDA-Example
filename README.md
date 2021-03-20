@@ -56,7 +56,7 @@ python3 time.py --compiler setup
 python3 time.py --compiler cmake
 ```
 
-**Train**  
+**Train model**  
 ```shell
 python3 train.py --compiler jit
 python3 train.py --compiler setup
