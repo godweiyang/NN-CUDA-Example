@@ -1,4 +1,4 @@
-# Torch-cuda-example
+# Torch-CUDA-Example
 A simple example for PyTorch calling custom CUDA operators.
 
 We provide three ways to compile the CUDA kernel and its cpp warpper, including JIT, Setuptools and CMake.
