@@ -5,9 +5,10 @@ A simple example for PyTorch calling custom CUDA operators.
 * NVIDIA Driver: 418.116.00
 * CUDA: 11.0
 * Python: 3.7.3
-* GCC: 8.3.0
-* CMake: 3.16.3
 * PyTorch: 1.7.0+cu110
+* CMake: 3.16.3
+* Ninja: 1.10.0
+* GCC: 8.3.0
 
 *Cannot ensure successful running in other environments.*
 
