@@ -40,7 +40,7 @@ Directly run python code as in next section.
 python3 setup.py install
 ```
 
-**CMake (To do)**  
+**CMake (not implemented)**  
 ```shell
 mkdir build
 cd build
