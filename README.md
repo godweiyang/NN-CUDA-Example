@@ -1,6 +1,8 @@
 # Torch-cuda-example
 A simple example for PyTorch calling custom CUDA operators.
 
+We provide three ways to compile the CUDA kernel and its cpp warpper, including JIT, Setuptools and CMake.
+
 ## Environments
 * NVIDIA Driver: 418.116.00
 * CUDA: 11.0
@@ -33,17 +35,17 @@ A simple example for PyTorch calling custom CUDA operators.
 **JIT**  
 Directly run python code as in next section.
 
+**Setuptools**  
+```shell
+python3 setup.py install
+```
+
 **CMake (To do)**  
 ```shell
 mkdir build
 cd build
 cmake -DCMAKE_PREFIX_PATH="$(python3 -c 'import torch.utils; print(torch.utils.cmake_prefix_path)')" ../
 make -j
-```
-
-**Setuptools**  
-```shell
-python3 setup.py install
 ```
 
 ### Run python
