@@ -19,7 +19,7 @@ def show_time(func):
         func()
     for _ in range(ntest):
         # sync the threads to get accurate cuda running time
-        # torch.cuda.synchronize(device="cuda:0")
+        torch.cuda.synchronize(device="cuda:0")
         start_time = time.time()
         r = func()
         torch.cuda.synchronize(device="cuda:0")
