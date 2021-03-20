@@ -1,13 +1,7 @@
 import time
+import argparse
 import numpy as np
 import torch
-from torch.utils.cpp_extension import load
-
-cuda_module = load(name="add2",
-                   extra_include_paths=["./include"],
-                   sources=["./kernel/add2.cpp", "./kernel/add2.cu"],
-                   verbose=True)
-# torch.ops.load_library("build/libadd2.so")
 
 # c = a + b (shape: [n])
 n = 1024 * 1024
@@ -36,8 +30,16 @@ def show_time(func):
     return times, res
 
 def run_cuda():
-    cuda_module.torch_launch_add2(cuda_c, a, b, n)
-    # torch.ops.add2.torch_launch_add2(c, a, b, n)
+    if args.compiler == 'jit':
+        cuda_module.torch_launch_add2(cuda_c, a, b, n)
+    elif args.compiler == 'setup':
+        add2.torch_launch_add2(cuda_c, a, b, n)
+    elif args.compiler == 'cmake':
+        raise NotImplementedError("Not implement now.")
+        # torch.ops.add2.torch_launch_add2(c, a, b, n)
+    else:
+        raise Exception("Type of cuda compiler must be one of jit/setup/cmake.")
+    
     return cuda_c
 
 def run_torch():
@@ -46,10 +48,29 @@ def run_torch():
     a + b
     return None
 
-print("Running cuda...")
-cuda_time, _ = show_time(run_cuda)
-print("Cuda time:  {:.3f}us".format(np.mean(cuda_time)))
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--compiler', type=str, choices=['jit', 'setup', 'cmake'], default='jit')
+    args = parser.parse_args()
 
-print("Running torch...")
-torch_time, _ = show_time(run_torch)
-print("Torch time:  {:.3f}us".format(np.mean(torch_time)))
+    if args.compiler == 'jit':
+        from torch.utils.cpp_extension import load
+        cuda_module = load(name="add2",
+                           extra_include_paths=["include"],
+                           sources=["kernel/add2.cpp", "kernel/add2_kernel.cu"],
+                           verbose=True)
+    elif args.compiler == 'setup':
+        import add2
+    elif args.compiler == 'cmake':
+        raise NotImplementedError("Not implement now.")
+        # torch.ops.load_library("build/libadd2.so")
+    else:
+        raise Exception("Type of cuda compiler must be one of jit/setup/cmake.")
+
+    print("Running cuda...")
+    cuda_time, _ = show_time(run_cuda)
+    print("Cuda time:  {:.3f}us".format(np.mean(cuda_time)))
+
+    print("Running torch...")
+    torch_time, _ = show_time(run_torch)
+    print("Torch time:  {:.3f}us".format(np.mean(torch_time)))

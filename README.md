@@ -7,7 +7,7 @@ A simple example for PyTorch calling custom CUDA operators.
 │   └── add2.h # header file of add2 cuda kernel
 ├── kernel
 │   ├── CMakeLists.txt
-│   ├── add2.cu # add2 cuda kernel
+│   ├── add2_kernel.cu # add2 cuda kernel
 │   └── add2.cpp # torch warpper of add2 cuda kernel
 ├── LICENSE
 ├── README.md
@@ -19,30 +19,34 @@ A simple example for PyTorch calling custom CUDA operators.
 ## Usage
 ### Compile cpp and cuda
 **JIT**  
-Directly run python code.
+Directly run python code as in next section.
 
 **CMake (To do)**  
 ```shell
 mkdir build
 cd build
-cmake -DCMAKE_PREFIX_PATH="$(python3 -c 'import torch.utils; print(torch.utils.cmake_prefix_path)')" ../kernel/
+cmake -DCMAKE_PREFIX_PATH="$(python3 -c 'import torch.utils; print(torch.utils.cmake_prefix_path)')" ../
 make -j
 ```
 
-**Setuptools (To do)**  
+**Setuptools**  
 ```shell
-python3 setup.py build develop
+python3 setup.py install
 ```
 
 ### Run python
 **Compare kernel time**  
 ```shell
-python3 time.py
+python3 time.py --compiler jit
+python3 time.py --compiler setup
+python3 time.py --compiler cmake
 ```
 
 **Train**  
 ```shell
-python3 train.py
+python3 train.py --compiler jit
+python3 train.py --compiler setup
+python3 train.py --compiler cmake
 ```
 
 ## Details
