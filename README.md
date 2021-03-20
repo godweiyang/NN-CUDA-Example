@@ -62,5 +62,8 @@ python3 train.py --compiler setup
 python3 train.py --compiler cmake
 ```
 
-## Details
+## Details (in Chinese)
 [https://godweiyang.com/2021/03/18/torch-cpp-cuda](https://godweiyang.com/2021/03/18/torch-cpp-cuda)
+
+## F.A.Q
+Coming soon...
