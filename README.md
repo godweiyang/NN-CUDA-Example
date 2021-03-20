@@ -12,7 +12,7 @@ A simple example for PyTorch calling custom CUDA operators.
 ├── LICENSE
 ├── README.md
 ├── setup.py
-├── show_time.py # time comparison of cuda kernel and torch
+├── time.py # time comparison of cuda kernel and torch
 └── train.py # training using custom cuda kernel
 ```
 
@@ -37,7 +37,7 @@ python3 setup.py build develop
 ### Run python
 **Compare kernel time**  
 ```shell
-python3 show_time.py
+python3 time.py
 ```
 
 **Train**  
