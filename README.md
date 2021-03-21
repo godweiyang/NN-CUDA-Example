@@ -29,17 +29,16 @@ We provide three ways to compile the CUDA kernel and its cpp warpper, including 
 └── train.py # training using custom cuda kernel
 ```
 
-## Usage
-### Compile cpp and cuda
-**JIT**  
+## Compile cpp and cuda
+### JIT
 Directly run python code as in next section.
 
-**Setuptools**  
+### Setuptools
 ```shell
 python3 setup.py install
 ```
 
-**CMake**  
+### CMake
 ```shell
 mkdir build
 cd build
@@ -47,15 +46,15 @@ cmake -DCMAKE_PREFIX_PATH="$(python3 -c 'import torch.utils; print(torch.utils.c
 make
 ```
 
-### Run python
-**Compare kernel time**  
+## Run python
+### Compare kernel time
 ```shell
 python3 time.py --compiler jit
 python3 time.py --compiler setup
 python3 time.py --compiler cmake
 ```
 
-**Train model**  
+### Train model
 ```shell
 python3 train.py --compiler jit
 python3 train.py --compiler setup
