@@ -62,8 +62,8 @@ python3 train.py --compiler cmake
 ```
 
 ## Details (in Chinese)
-[https://godweiyang.com/2021/03/18/torch-cpp-cuda](https://godweiyang.com/2021/03/18/torch-cpp-cuda)
-[https://godweiyang.com/2021/03/18/torch-cpp-cuda-2](https://godweiyang.com/2021/03/18/torch-cpp-cuda-2)
+[https://godweiyang.com/2021/03/18/torch-cpp-cuda](https://godweiyang.com/2021/03/18/torch-cpp-cuda)  
+[https://godweiyang.com/2021/03/18/torch-cpp-cuda-2](https://godweiyang.com/2021/03/18/torch-cpp-cuda-2)  
 [https://godweiyang.com/2021/03/18/torch-cpp-cuda-3](https://godweiyang.com/2021/03/18/torch-cpp-cuda-3)
 
 ## F.A.Q
