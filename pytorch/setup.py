@@ -7,7 +7,7 @@ setup(
     ext_modules=[
         CUDAExtension(
             "add2",
-            ["kernel/add2.cpp", "kernel/add2_kernel.cu"],
+            ["pytorch/add2_ops.cpp", "kernel/add2_kernel.cu"],
         )
     ],
     cmdclass={
