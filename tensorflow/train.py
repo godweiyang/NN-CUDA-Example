@@ -1,43 +1,37 @@
+import os
 import argparse
 import numpy as np
-import torch
-from torch import nn
-from torch.autograd import Function
+import tensorflow as tf
+os.environ['CUDA_VISIBLE_DEVICES'] = '0'
 
-class AddModelFunction(Function):
-    @staticmethod
-    def forward(ctx, a, b, n):
-        c = torch.empty(n).to(device="cuda:0")
-
-        if args.compiler == 'jit':
-            cuda_module.torch_launch_add2(c, a, b, n)
-        elif args.compiler == 'setup':
-            add2.torch_launch_add2(c, a, b, n)
-        elif args.compiler == 'cmake':
-            torch.ops.add2.torch_launch_add2(c, a, b, n)
-        else:
-            raise Exception("Type of cuda compiler must be one of jit/setup/cmake.")
-
-        return c
-
-    @staticmethod
-    def backward(ctx, grad_output):
-        return (grad_output, grad_output, None)
+@tf.RegisterGradient("Add2")
+def add2_grad(op, *grads):
+    grad_output = grads[0]
+    return grad_output, grad_output
 
 
-class AddModel(nn.Module):
+class AddModel(tf.keras.Model):
     def __init__(self, n):
         super(AddModel, self).__init__()
         self.n = n
-        self.a = nn.Parameter(torch.Tensor(self.n))
-        self.b = nn.Parameter(torch.Tensor(self.n))
-        self.a.data.normal_(mean=0.0, std=1.0)
-        self.b.data.normal_(mean=0.0, std=1.0)
 
-    def forward(self):
-        a2 = torch.square(self.a)
-        b2 = torch.square(self.b)
-        c = AddModelFunction.apply(a2, b2, self.n)
+    def build(self, input_shape):
+        self.a = self.add_weight(name="a",
+                                 shape=(self.n,),
+                                 trainable=True,
+                                 initializer=tf.random_normal_initializer(
+                                     mean=0., stddev=1.0))
+        self.b = self.add_weight(name="b",
+                                 shape=(self.n,),
+                                 trainable=True,
+                                 initializer=tf.random_normal_initializer(
+                                     mean=0., stddev=1.0))
+        super(AddModel, self).build(input_shape)
+
+    def call(self, tmp=None):
+        a2 = tf.math.square(self.a)
+        b2 = tf.math.square(self.b)
+        c = cuda_module.add2(a2, b2)
         return c
 
 if __name__ == "__main__":
@@ -46,15 +40,11 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     if args.compiler == 'jit':
-        from torch.utils.cpp_extension import load
-        cuda_module = load(name="add2",
-                           extra_include_paths=["include"],
-                           sources=["pytorch/add2_ops.cpp", "kernel/add2_kernel.cu"],
-                           verbose=True)
+        raise NotImplementedError
     elif args.compiler == 'setup':
-        import add2
+        raise NotImplementedError
     elif args.compiler == 'cmake':
-        torch.ops.load_library("build/libadd2.so")
+        cuda_module = tf.load_op_library('build/libadd2.so')
     else:
         raise Exception("Type of cuda compiler must be one of jit/setup/cmake.")
 
@@ -62,17 +52,15 @@ if __name__ == "__main__":
 
     print("Initializing model...")
     model = AddModel(n)
-    model.to(device="cuda:0")
+    opt = tf.keras.optimizers.Adam(0.1)
+    loss = tf.keras.losses.MeanAbsoluteError()
 
-    print("Initializing optimizer...")
-    opt = torch.optim.SGD(model.parameters(), lr=0.01)
-
+    print("Configuring model...")
+    model.compile(optimizer=opt,
+                  loss=loss)
+    
     print("Begin training...")
-    for epoch in range(500):
-        opt.zero_grad()
-        output = model()
-        loss = output.sum()
-        loss.backward()
-        opt.step()
-        if epoch % 25 == 0:
-            print("epoch {:>3d}: loss = {:>8.3f}".format(epoch, loss))
+    model.fit(x=np.array([1.]),
+              y=np.array([0.]),
+              batch_size=1,
+              epochs=100)
