@@ -14,17 +14,16 @@ ntest = 10
 
 def show_time(func):
     times = list()
-    res = list()
+    res = None
     # GPU warm up
     for _ in range(10):
-        func()
+        res = func()
     for _ in range(ntest):
+        # sync the threads to get accurate cuda running time
         start_time = time.time()
-        r = func()
+        func()
         end_time = time.time()
-
         times.append((end_time-start_time)*1e6)
-        res.append(r)
     return times, res
 
 def run_cuda():
@@ -58,9 +57,12 @@ if __name__ == "__main__":
         raise Exception("Type of cuda compiler must be one of jit/setup/cmake.")
 
     print("Running cuda...")
-    cuda_time, _ = show_time(run_cuda)
+    cuda_time, cuda_res = show_time(run_cuda)
     print("Cuda time:  {:.3f}us".format(np.mean(cuda_time)))
 
     print("Running tensorflow...")
-    tf_time, _ = show_time(run_tf)
+    tf_time, tf_res = show_time(run_tf)
     print("Tensorflow time:  {:.3f}us".format(np.mean(tf_time)))
+
+    tf.experimental.numpy.allclose(cuda_res, tf_res)
+    print("Kernel test passed.")
