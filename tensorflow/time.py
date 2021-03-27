@@ -19,11 +19,8 @@ def show_time(func):
     for _ in range(10):
         func()
     for _ in range(ntest):
-        # sync the threads to get accurate cuda running time
-        # torch.cuda.synchronize(device="cuda:0")
         start_time = time.time()
         r = func()
-        # torch.cuda.synchronize(device="cuda:0")
         end_time = time.time()
 
         times.append((end_time-start_time)*1e6)
@@ -43,8 +40,6 @@ def run_cuda():
     return cuda_c
 
 def run_tf():
-    # return None to avoid intermediate GPU memory application
-    # for accurate time statistics
     c = a + b
     return c
 

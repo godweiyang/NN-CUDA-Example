@@ -73,7 +73,11 @@ make
 ## Run python
 `$CODEBASE` in the following represents `pytorch` or `tensorflow`.
 
+*Note that for TensorFlow, the compiler only supports cmake currently.*
+
 ### Compare kernel time
+*Note that for TensorFlow, the time statistics is not correct currently.*
+
 ```shell
 python3 $CODEBASE/time.py --compiler jit
 python3 $CODEBASE/time.py --compiler setup

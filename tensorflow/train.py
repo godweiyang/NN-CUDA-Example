@@ -1,13 +1,8 @@
 import argparse
 import numpy as np
-import tensorflow as tf
-
-@tf.RegisterGradient("Add2")
-def add2_grad(op, *grads):
-    input_tensor = op.inputs[0]
-    output_grad = grads[0]
-    return cuda_module.time_two_grad(input_tensor, output_grad)
-
+import torch
+from torch import nn
+from torch.autograd import Function
 
 class AddModelFunction(Function):
     @staticmethod
@@ -51,11 +46,15 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     if args.compiler == 'jit':
-        raise NotImplementedError
+        from torch.utils.cpp_extension import load
+        cuda_module = load(name="add2",
+                           extra_include_paths=["include"],
+                           sources=["pytorch/add2_ops.cpp", "kernel/add2_kernel.cu"],
+                           verbose=True)
     elif args.compiler == 'setup':
-        raise NotImplementedError
+        import add2
     elif args.compiler == 'cmake':
-        cuda_module = tf.load_op_library('build/libadd2.so')
+        torch.ops.load_library("build/libadd2.so")
     else:
         raise Exception("Type of cuda compiler must be one of jit/setup/cmake.")
 
