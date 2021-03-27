@@ -1,9 +1,9 @@
 # Neural Network CUDA Example
 ![logo](./image/logo.png)
 
-A simple example for neural network toolkits (PyTorch, TensorFlow, etc.) calling custom CUDA operators.
+Several simple examples for neural network toolkits (PyTorch, TensorFlow, etc.) calling custom CUDA operators.
 
-We provide several ways to compile the CUDA kernels and their cpp wrapper, including jit, setuptools and cmake.
+We provide several ways to compile the CUDA kernels and their cpp wrappers, including jit, setuptools and cmake.
 
 We also provide several python codes to call the CUDA kernels, including kernel time statistics and model training.
 
