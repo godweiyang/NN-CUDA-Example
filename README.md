@@ -1,5 +1,5 @@
 # Neural Network CUDA Example
-![](https://github.com/godweiyang/NN-CUDA-Example/image/logo.png)
+![logo](./image/logo.png)
 
 A simple example for neural network toolkits (PyTorch, TensorFlow, etc.) calling custom CUDA operators.
 
