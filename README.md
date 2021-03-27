@@ -1,7 +1,7 @@
-# PyTorch-TensorFlow-CUDA-Example
-A simple example for PyTorch and TensorFlow calling custom CUDA operators.
+# Neural Network CUDA Example
+A simple example for neural network toolkits (PyTorch, TensorFlow, etc.) calling custom CUDA operators.
 
-We provide three ways to compile the CUDA kernel and its cpp warpper, including JIT, setuptools and cmake.
+We provide three ways to compile the CUDA kernel and its cpp warpper, including jit, setuptools and cmake.
 
 ## Environments
 * NVIDIA Driver: 418.116.00
