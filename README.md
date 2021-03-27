@@ -1,4 +1,6 @@
 # Neural Network CUDA Example
+![](../image/logo.png)
+
 A simple example for neural network toolkits (PyTorch, TensorFlow, etc.) calling custom CUDA operators.
 
 We provide three ways to compile the CUDA kernel and its cpp warpper, including jit, setuptools and cmake.
@@ -92,9 +94,9 @@ python3 $CODEBASE/train.py --compiler cmake
 ```
 
 ## Details (in Chinese)
-[https://godweiyang.com/2021/03/18/torch-cpp-cuda](https://godweiyang.com/2021/03/18/torch-cpp-cuda)  
-[https://godweiyang.com/2021/03/18/torch-cpp-cuda-2](https://godweiyang.com/2021/03/18/torch-cpp-cuda-2)  
-[https://godweiyang.com/2021/03/18/torch-cpp-cuda-3](https://godweiyang.com/2021/03/18/torch-cpp-cuda-3)
+[PyTorch自定义CUDA算子教程与运行时间分析](https://godweiyang.com/2021/03/18/torch-cpp-cuda)  
+[详解PyTorch编译并调用自定义CUDA算子的三种方式](https://godweiyang.com/2021/03/18/torch-cpp-cuda-2)  
+[三分钟教你如何PyTorch自定义反向传播](https://godweiyang.com/2021/03/18/torch-cpp-cuda-3)
 
 ## F.A.Q
 Coming soon...
