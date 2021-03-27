@@ -18,10 +18,12 @@ def show_time(func):
     # GPU warm up
     for _ in range(10):
         res = func()
+        with tf.control_dependencies([res]):
+            no_op = tf.no_op()
     for _ in range(ntest):
-        # sync the threads to get accurate cuda running time
         start_time = time.time()
-        func()
+        with tf.control_dependencies([func()]):
+            no_op = tf.no_op()
         end_time = time.time()
         times.append((end_time-start_time)*1e6)
     return times, res
