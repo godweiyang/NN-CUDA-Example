@@ -7,7 +7,7 @@ We provide several ways to compile the CUDA kernels and their cpp wrappers, incl
 
 We also provide several python codes to call the CUDA kernels, including kernel time statistics and model training.
 
-*For more accurate time statistics, you'd best use **nvvp** or **nsys** to run the code.*
+*For more accurate time statistics, you'd best use **nvprof** or **nsys** to run the code.*
 
 ## Environments
 * NVIDIA Driver: 418.116.00
