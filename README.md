@@ -49,7 +49,7 @@ Directly run the python code.
 
 **Setuptools**  
 ```shell
-python3 setup.py install
+python3 pytorch/setup.py install
 ```
 
 **CMake**  
@@ -81,7 +81,7 @@ python3 pytorch/train.py --compiler cmake
 ```shell
 mkdir build
 cd build
-cmake  ../tensorflow
+cmake ../tensorflow
 make
 ```
 
@@ -102,4 +102,6 @@ python3 tensorflow/train.py --compiler cmake
 [三分钟教你如何PyTorch自定义反向传播](https://godweiyang.com/2021/03/18/torch-cpp-cuda-3)
 
 ## F.A.Q
-Coming soon...
+**Q.** ImportError: libc10.so: cannot open shared object file: No such file or directory
+
+**A.** You must do `import torch` before `import add2`.
