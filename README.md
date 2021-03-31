@@ -102,10 +102,8 @@ python3 tensorflow/train.py --compiler cmake
 [三分钟教你如何PyTorch自定义反向传播](https://godweiyang.com/2021/03/18/torch-cpp-cuda-3)
 
 ## F.A.Q
-**Q.** ImportError: libc10.so: cannot open shared object file: No such file or directory
-
+> **Q.** ImportError: libc10.so: cannot open shared object file: No such file or directory  
 **A.** You must do `import torch` before `import add2`.
 
-**Q.** tensorflow.python.framework.errors_impl.NotFoundError: build/libadd2.so: undefined symbol: _ZTIN10tensorflow8OpKernelE
-
+> **Q.** tensorflow.python.framework.errors_impl.NotFoundError: build/libadd2.so: undefined symbol: _ZTIN10tensorflow8OpKernelE  
 **A.** Check if `${TF_LFLAGS}` in `CmakeLists.txt` is correct.
