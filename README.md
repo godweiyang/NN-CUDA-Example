@@ -105,3 +105,7 @@ python3 tensorflow/train.py --compiler cmake
 **Q.** ImportError: libc10.so: cannot open shared object file: No such file or directory
 
 **A.** You must do `import torch` before `import add2`.
+
+**Q.** tensorflow.python.framework.errors_impl.NotFoundError: build/libadd2.so: undefined symbol: _ZTIN10tensorflow8OpKernelE
+
+**A.** Check if `${TF_LFLAGS}` in `CmakeLists.txt` is correct.
