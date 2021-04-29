@@ -98,8 +98,8 @@ python3 tensorflow/train.py --compiler cmake
 
 ## Implementation details (in Chinese)
 [PyTorch自定义CUDA算子教程与运行时间分析](https://godweiyang.com/2021/03/18/torch-cpp-cuda)  
-[详解PyTorch编译并调用自定义CUDA算子的三种方式](https://godweiyang.com/2021/03/18/torch-cpp-cuda-2)  
-[三分钟教你如何PyTorch自定义反向传播](https://godweiyang.com/2021/03/18/torch-cpp-cuda-3)
+[详解PyTorch编译并调用自定义CUDA算子的三种方式](https://godweiyang.com/2021/03/21/torch-cpp-cuda-2)  
+[三分钟教你如何PyTorch自定义反向传播](https://godweiyang.com/2021/03/24/torch-cpp-cuda-3)
 
 ## F.A.Q
 > **Q.** ImportError: libc10.so: cannot open shared object file: No such file or directory  
